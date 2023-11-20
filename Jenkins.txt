@@ -1,0 +1,24 @@
+pipeline {
+  agent any
+  tools {
+        maven '3.9.5'
+        jdk 'jdk8'
+    }
+  stages {
+   stage('Checkout'){
+              steps {
+                  git branch: 'main', credentialsId: 'Rs@ndeep47', url: 'https://github.com/rsandeep47/Git11123.git'
+              }
+          }
+          stage ('Build') {
+              steps {
+                  sh 'mvn -Dmaven.test.failure.ignore=true install'
+              }
+          }
+    stage('Finally done') {
+      steps {
+        echo 'if I made it here, no critical items were found'
+      }
+    }
+  }
+}
